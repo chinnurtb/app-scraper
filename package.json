@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "async": "~0.2.9",
-    "noodle": "0.0.3",
+    "noodlejs": "0.3.0",
     "commander": "~2.0.0"
   }
 }

@@ -3,7 +3,8 @@
 var noodle = require('noodlejs'),
     async = require('async'),
     program = require('commander'),
-    utils = require('./lib/utils.js');
+    utils = require('./lib/utils.js'),
+    query = require('./lib/query/');
 
 var appVersion = require('./package.json').version;
 
@@ -15,7 +16,6 @@ program
 
 var listWebsites = [];
 if(program.urls){
-    console.log('number args ='+process.argv);
     process.argv.forEach(function(item, index){
 	if(index >= 3) {
 	    try{
@@ -33,3 +33,25 @@ if(program.urls){
     });
 }
 
+console.log( listWebsites );
+query.queryWebsiteForName(listWebsites[0], function(res){
+    console.log(res);
+});
+/*
+
+
+
+noodle.query({
+    url: "http://dolphin.com",
+    selector: ".logo",
+    cache: false
+})
+.then( function(results) {
+    console.log( JSON.stringify(results) );
+})
+.fail(function(error) {
+    console.log( "error"+error );
+});
+
+
+*/
