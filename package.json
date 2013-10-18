@@ -4,7 +4,8 @@
   "description": "A web scraper, that, given a company's website, can find if the company has Android or iOS support",
   "main": "index.js",
   "scripts": {
-    "test": "make test"
+    "test": "make test",
+    "start": "node index.js -u websites.txt"
   },
   "repository": {
     "type": "git",
