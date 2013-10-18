@@ -24,7 +24,7 @@ public class Main {
                         + "\tandroiId : a valid android id (retrieved typing *#*#8255#*#* "
                         + "on device or emulator)\n"
                         + "\tquery : string to be queried"
-                        + "\tlimit (optional): maximum number of returned results");
+                        + "\tlimit (optional): maximum number of returned results. Default is 1");
     }
 
     /**
@@ -42,7 +42,7 @@ public class Main {
             String password = args[1];
             String androidId = args[2];
             String query = args[3];
-            int limit = (args.length == 5 ? Integer.parseInt(args[4]) : 3);
+            int limit = (args.length == 5 ? Integer.parseInt(args[4]) : 1);
             performQuery(login, password, androidId, query, limit);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -72,7 +72,7 @@ public class Main {
         if(response != null && response.hasAppsResponse() && response.getAppsResponse().getAppCount() > 0){
             List<App> appList = response.getAppsResponse().getAppList();
             for(int i = 0; i<appList.size(); ++i){
-                System.out.println("{"+ appList.get(i).toString()+"}");
+                System.out.println("{\n"+ appList.get(i).toString()+"}");
                 if(i < appList.size() -1)
                     System.out.println(",");
             }

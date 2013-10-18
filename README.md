@@ -22,7 +22,7 @@ All the dependencies of the project will be downloaded automatically. Depending 
 See `websites.txt` for an example of that file.
 
 ##Using the androidMarketLib alone##
-The project uses a customized AndroidMarketLib, used to query the Android Play Store for information on the app. This library can be found under /lib/jar, while the source code can be found under /java.
+The project uses a customized AndroidMarketLib, used to query the Android Play Store for information on the app. This library can be found under `/lib/jar`, while the source code can be found under `/java`.
 This library was compiled based on the code by Thiel Alexandre [here](http://code.google.com/p/android-market-api/) (Apache 2.0 License).
 
 To use this library from the command line, one can run it as a jar, using the command:
@@ -35,7 +35,7 @@ where:
 - password: password of aforementioned email address
 - androidId: android ID of a device or emulator associated with email address
 - query: query to be searched for on the market. More details can be found [here](https://github.com/anas-ambri/app-scraper#queries)
-- limit (optional integer): maximum number of results returned. Default is 3
+- limit (optional integer): maximum number of results returned. Default is 1
 
 For example, the command: 
 

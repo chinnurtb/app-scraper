@@ -1,12 +1,14 @@
 {
     "playStore":
     {
-	"emailAddress" : "",
-	"password": "",
+	"emailAddress" : "radialpointmobile@gmail.com",
+	"password": "r@di@1p01nt",
+	"androidId": "39cffa85d804bc98",
 	"dependencies" : [
 	    "./lib/jar/androidmarketlib.jar",
 	    "./lib/jar/protobuf-java.jar"
-	]
+	],
+	"mainLibClass": "com.gc.android.market.api.Main"
     },
     "appStore":
     {

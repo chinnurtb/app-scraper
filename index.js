@@ -11,6 +11,7 @@ var async = require('async'),
 
 var appVersion = require('./package.json').version;
 var config = require('./config/config.json');
+playStore.init(config);
 
 program
     .version(appVersion)
@@ -42,28 +43,31 @@ if(program.urls){
     });
 }
 
-console.log( listApps[0] );
-/*
 listApps.forEach(function(app){
     utils.getWebsiteName(app.websiteUrl, function(name){
-	app.setWebsiteName(name);
-	console.log( app.websiteName );
+	app.websiteName = name;
 	try{
-	    appStore.findApp(app.websiteName, function(res){
+	    appStore.findAppByName(app.websiteName, function(res){
 		var results = JSON.parse(res).results;
+		console.log( "*************Apple*************" );
 		console.log( results[0] );
 	    });
-	}catch(err){
-	    console.log( "Failed to find app because "+err );
 	}
+	catch(err){
+	    console.log( "Failed to find information in the appstore because "+err );
+	}
+
+	try{
+	    playStore.findAppByName(app.websiteName, function(res){
+		console.log( "*************Android*************" );
+		console.log( res );
+	    });
+	}
+	catch(err){
+	    console.log( "Failed to find information in the playstore because "+err );
+	}
+
     });
 });
-*/
-
-playStore.init(config);
-playStore.findApp("blah", function(str){
-    console.log( str );
-});
-
 
 noodle.stopCache();
