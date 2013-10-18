@@ -21,6 +21,4 @@ Depending on how `npm` was installed, you might need to run the command `npm ins
 1. Create a `websites.txt` file containing a list of newline separated websites.
 2. Run the command `npm start`
 
-Here is an example of a websites.txt file:
-     http://dolphin.com
-     http://fashiolista.com
+See `websites.txt` for an example of that file.
