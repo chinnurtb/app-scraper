@@ -6,9 +6,11 @@ var async = require('async'),
     utils = require('./lib/utils.js'),
     query = require('./lib/query/'),
     AppInfo = require('./lib/model/'),
-    appStore = require('./lib/appStore/');
+    appStore = require('./lib/appStore/'),
+    playStore = require('./lib/playStore/');
 
 var appVersion = require('./package.json').version;
+var config = require('./config/config.json');
 
 program
     .version(appVersion)
@@ -41,7 +43,7 @@ if(program.urls){
 }
 
 console.log( listApps[0] );
-
+/*
 listApps.forEach(function(app){
     utils.getWebsiteName(app.websiteUrl, function(name){
 	app.setWebsiteName(name);
@@ -55,6 +57,12 @@ listApps.forEach(function(app){
 	    console.log( "Failed to find app because "+err );
 	}
     });
+});
+*/
+
+playStore.init(config);
+playStore.findApp("blah", function(str){
+    console.log( str );
 });
 
 
