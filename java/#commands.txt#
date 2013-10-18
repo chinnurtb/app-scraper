@@ -1,8 +1,0 @@
-To compile:
-javac -d bin -cp ./protobuf-java-2.4.1.jar -sourcepath src src/com/gc/android/market/api/Main.java
-
-To jarify:
-jar cfm <jarName> manifest.txt bin/*.class
-
-To run:
-java -jar <pathToJar>
