@@ -1,0 +1,20 @@
+{
+    "playStore":
+    {
+	"emailAddress" : "",
+	"password": "",
+	"androidId": "",
+	"dependencies" : [
+	    "./lib/jar/androidmarketlib.jar",
+	    "./lib/jar/protobuf-java.jar"
+	],
+	"mainLibClass": "com.gc.android.market.api.Main"
+    },
+    "appStore":
+    {
+    },
+    "environment":
+    {
+	"pathToJava" : "/usr/bin/java"
+    }
+}
