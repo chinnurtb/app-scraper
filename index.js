@@ -28,26 +28,78 @@ var listApps = utils.loadWebsites();
 listApps.forEach(function(app){
     utils.getWebsiteName(app.websiteUrl, function(name){
 	app.websiteName = name;
-	try{
-	    appStore.findAppByName(app.websiteName, function(res){
-		console.log( "*************Apple*************" );
-		console.log( res );
-	    });
-	}
-	catch(err){
-	    console.log( "Failed to find information in the appstore because "+err );
-	}
 
-	try{
-	    playStore.findAppByName(app.websiteName, function(res){
-		console.log( "*************Android*************" );
-		console.log( res );
+	async.series(
+	    [
+		function(callback){
+		    console.log( "Starting appStoreUrl for "+app.websiteName );
+		    utils.getWebsiteiOSAppUrl(app.websiteUrl, function(url){
+			app.appStoreUrl = url;
+			callback(null);
+		    });
+		},
+		function(callback){
+		    console.log( "Starting appStoreId for "+app.websiteName );
+		    utils.getWebsiteiOSAppId(app.websiteUrl, function(id){
+			app.appStoreId = id;
+			callback(null);
+		    });
+		},
+		function(callback){
+		    console.log( "Starting playStoreUrl for "+app.websiteName );
+		    utils.getWebsiteAndroidAppUrl(app.websiteUrl, function(url){
+			app.playStoreUrl = url;
+			callback(null);
+		    });
+		},
+		function(callback){
+		    console.log( "Starting appStoreInfo for "+app.websiteName );
+		    appStore.findAppByName(app.websiteName, function(err, res){
+			if(err) callback(err);
+			else {
+			    if(!res)
+				app.appStoreInfo = "No info found";
+			    app.appStoreInfo = res;
+			    callback(null);
+			}
+		    });
+		},
+		function(callback){
+		    if(!app.appStoreId){
+			callback(null);
+		    }
+		    else {
+			console.log( "Starting appStoreInfo with id for "+app.websiteName );
+			appStore.findAppById(app.appStoreId, app.appwebsiteName, function(err, res){
+			    if(err) callback(err);
+			    else {
+    				if(!res)
+				    app.appStoreInfo = "No info found";
+				app.appStoreInfo = res;
+				callback(null);
+			    }
+			});
+		    }
+		},
+		function(callback){
+		    console.log( "Starting playStoreInfo for "+app.websiteName );
+		    playStore.findAppByName(app.websiteName, function(err, res){
+			if(err) callback(err);
+			else {
+			    if(!res)
+				app.playStoreInfo = "No info found";
+			    else
+				app.playStoreInfo = res;
+			    callback(null);
+			}
+		    });
+		}
+	    ],
+	    function(err){
+		console.log( "processing finished" );
+		console.log( JSON.stringify(listApps, null, 4) );
+		utils.writeResultsToFile(JSON.stringify(listApps, null, 4));
 	    });
-	}
-	catch(err){
-	    console.log( "Failed to find information in the playstore because "+err );
-	}
-
     });
 });
 
